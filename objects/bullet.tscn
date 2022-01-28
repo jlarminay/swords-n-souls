@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/circle.png" type="Texture" id=1]
+[ext_resource path="res://scripts/bullet.gd" type="Script" id=2]
+[ext_resource path="res://audio/sounds/bullet.wav" type="AudioStream" id=3]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.00574712, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.994253, 0.00454545 ), -3.16364, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 6.25
+
+[node name="bullet" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 11
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 25
+speed_scale = 3.0
+local_coords = false
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity_random = 1.0
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+radial_accel = 5.0
+radial_accel_random = 1.0
+scale_amount = 7.0
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 4 )
+color = Color( 0.843137, 0.156863, 0.156863, 1 )
+hue_variation = 0.1
+hue_variation_random = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.603922, 0, 0, 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 3 )
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+points = PoolVector2Array( 0, 0, 10, 0 )
+width = 1.0
+default_color = Color( 0.054902, 0, 1, 1 )
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -15.0
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
