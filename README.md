@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/jlarminay/Swords-n-Souls/master/header.jpg" />
+
 # Swords n Souls
 
 I made this game for Itch.io's [Mini Jam 70](https://itch.io/jam/mini-jam-70-heaven). The theme was 'heaven' and the limitation was 'player must be an inanimate object'. This was my first time created a fully "finished" game so I didn't really know what to expect.
